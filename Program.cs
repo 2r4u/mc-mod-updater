@@ -12,7 +12,7 @@ client.DefaultRequestHeaders.Add("User-Agent", ".NET Foundation Repository Repor
 
 
 
-await (eraseJson("..\\..\\..\\data.json"));
+await eraseJson(@"..\\..\\..\\data.json");
 
 Console.WriteLine("What version of Minecraft are you updating to?");
 String version = Console.ReadLine();
@@ -32,6 +32,9 @@ if (yn(Console.ReadLine()))
     {
         await updateMods(client, file, version);
     }
+    Console.WriteLine("These are the file names of the mods that will be downloaded:");
+    var jsonfile = JsonSerializer.Deserialize<JsonElement>(File.ReadAllText(@"..\\..\\..\\data.json"));
+    FromJsonElement(jsonfile);
 }
 else
 {
@@ -41,14 +44,19 @@ static async Task eraseJson(string path)
 {
     File.WriteAllText(@path, String.Empty);
 }
+static (string? name, String author) FromJsonElement(JsonElement jsonElement)
+{
+    var name = jsonElement.GetProperty("hits").GetProperty("title").GetString();
+    var author = jsonElement.GetProperty("hits").GetProperty("author").GetString();
+    return (name, author);
+}
 
 static async Task updateMods(HttpClient client, String file, String version) 
 {   
-    
-    
     var json = await client.GetStringAsync("https://api.modrinth.com/v2/search?limit=1&query="+GetUntilOrEmpty(1,file,"-")+"&index=downloads&facets=[[\"categories:fabric\"],[\"versions:" + version + "\"]]");
     Console.WriteLine(GetUntilOrEmpty(1,file,"-"));
     File.AppendAllText(@"..\\..\\..\\data.json", json);
+    
 
     
 }
