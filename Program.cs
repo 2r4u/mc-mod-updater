@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.IO;
 using System.Collections;
 
+
 HttpClient client = new HttpClient();
 client.DefaultRequestHeaders.Accept.Clear();
 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
@@ -19,6 +20,7 @@ String version = Console.ReadLine();
 String mcPath = "..\\..\\..\\..\\..\\..\\AppData\\Roaming\\.minecraft\\mods";
     
 string[] files = Directory.GetFiles(@mcPath);
+ArrayList mods = new ArrayList();
 ArrayList fnames = new ArrayList();
 Console.WriteLine("These are the files in your mods folder:");
 foreach (string file in files) {
@@ -34,7 +36,7 @@ if (yn(Console.ReadLine()))
     }
     Console.WriteLine("These are the file names of the mods that will be downloaded:");
     var jsonfile = JsonSerializer.Deserialize<JsonElement>(File.ReadAllText(@"..\\..\\..\\data.json"));
-    FromJsonElement(jsonfile);
+    Console.WriteLine(FromJsonElement(jsonfile));
 }
 else
 {
@@ -42,7 +44,7 @@ else
 }
 static async Task eraseJson(string path)
 {
-    File.WriteAllText(@path, String.Empty);
+    File.WriteAllText(@path, "{\n\t\n}");
 }
 static (string? name, String author) FromJsonElement(JsonElement jsonElement)
 {
@@ -54,12 +56,20 @@ static (string? name, String author) FromJsonElement(JsonElement jsonElement)
 static async Task updateMods(HttpClient client, String file, String version) 
 {   
     var json = await client.GetStringAsync("https://api.modrinth.com/v2/search?limit=1&query="+GetUntilOrEmpty(1,file,"-")+"&index=downloads&facets=[[\"categories:fabric\"],[\"versions:" + version + "\"]]");
-    Console.WriteLine(GetUntilOrEmpty(1,file,"-"));
+    /*.Add(JsonSerializer.Deserialize<Mod>(json));
+    using JsonDocument doc = JsonDocument.Parse(json);
+    JsonElement root = doc.RootElement;
+    String js = ""1""root[0].Ge;*/
+    Console.WriteLine(GetUntilOrEmpty(1, file, "-"));
+    /*List<string> lines = File.ReadAllLines(@"..\\..\\..\\data.json").ToList<string>();
+    lines.Insert(lines.Capacity - 2, js);*/
+   /* File.WriteAllLines(@"..\\..\\..\\data.json", lines);*/
     File.AppendAllText(@"..\\..\\..\\data.json", json);
-    
 
-    
+
+
 }
+
 static string GetUntilOrEmpty( int mode,string text, String stopAt)
 {   if (mode == 1)
     {
@@ -106,3 +116,17 @@ bool yn(String str)
     }
     return false;
 }
+class Mod
+{
+    public string id {  get; set; }
+    public string title { get; set; }
+    public string description { get; set; }
+
+    public Mod(string id, string title, string description)
+    {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+    }
+}
+

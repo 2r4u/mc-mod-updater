@@ -26,7 +26,7 @@
         "1.19.2",
         "1.19.3"
       ],
-      "downloads": 19953,
+      "downloads": 20081,
       "follows": 89,
       "icon_url": "https://cdn.modrinth.com/data/MBAkmtvl/icon.png",
       "date_created": "2022-06-14T18:11:16.556742Z",
@@ -44,7 +44,8 @@
   "offset": 0,
   "limit": 1,
   "total_hits": 1
-} {
+} 
+{
   "hits": [
     {
       "project_id": "kYq5qkSL",
@@ -84,8 +85,8 @@
         "1.19.2",
         "1.19.3"
       ],
-      "downloads": 81293,
-      "follows": 309,
+      "downloads": 81577,
+      "follows": 311,
       "icon_url": "https://cdn.modrinth.com/data/kYq5qkSL/icon.png",
       "date_created": "2021-12-04T15:51:07.570294Z",
       "date_modified": "2022-12-11T03:04:37.310159Z",
@@ -130,7 +131,7 @@
         "1.19.2",
         "1.19.3"
       ],
-      "downloads": 1478,
+      "downloads": 1485,
       "follows": 45,
       "icon_url": "https://cdn.modrinth.com/data/vPNqo58Q/78a0ae61d366c770fd2c19dab595a045a2d0c106.png",
       "date_created": "2022-06-14T18:20:46.900416Z",
@@ -194,7 +195,7 @@
         "1.19.3-pre2",
         "22w43a"
       ],
-      "downloads": 457364,
+      "downloads": 458834,
       "follows": 978,
       "icon_url": "https://cdn.modrinth.com/data/9s6osm5g/icon.png",
       "date_created": "2022-04-21T10:29:41.555173Z",
@@ -242,7 +243,7 @@
         "1.19.2",
         "1.19.3"
       ],
-      "downloads": 11900,
+      "downloads": 12025,
       "follows": 22,
       "icon_url": "https://cdn.modrinth.com/data/XVnUIUAQ/faf5a2c1fd221c7a39f5726a66eb2c99eff6c33b.png",
       "date_created": "2023-01-09T02:49:38.767423Z",
@@ -286,7 +287,7 @@
         "1.19.2",
         "1.19.3"
       ],
-      "downloads": 106118,
+      "downloads": 106335,
       "follows": 338,
       "icon_url": "https://cdn.modrinth.com/data/iG6ZHsUV/icon.png",
       "date_created": "2022-05-01T15:47:57.776756Z",
@@ -359,7 +360,7 @@
         "23w06a",
         "23w07a"
       ],
-      "downloads": 21822,
+      "downloads": 21849,
       "follows": 221,
       "icon_url": "https://cdn.modrinth.com/data/wdLuzzEP/b6014c210bbedacf610f7d2dba55149dae9677c8.png",
       "date_created": "2021-06-13T13:30:06.191535Z",
@@ -434,8 +435,8 @@
         "22w06a",
         "22w07a"
       ],
-      "downloads": 219345,
-      "follows": 1468,
+      "downloads": 219950,
+      "follows": 1470,
       "icon_url": "https://cdn.modrinth.com/data/yBW8D80W/icon.png",
       "date_created": "2020-12-21T15:59:13.578447Z",
       "date_modified": "2022-12-23T22:03:23.095691Z",
@@ -481,7 +482,7 @@
         "1.19.2",
         "1.19.3"
       ],
-      "downloads": 10545,
+      "downloads": 10587,
       "follows": 191,
       "icon_url": "https://cdn.modrinth.com/data/6FtRfnLg/icon.png",
       "date_created": "2022-08-22T16:00:39.121484Z",
@@ -545,8 +546,8 @@
         "1.8.8",
         "1.8.9"
       ],
-      "downloads": 484446,
-      "follows": 902,
+      "downloads": 486524,
+      "follows": 903,
       "icon_url": "https://cdn.modrinth.com/data/NNAgCjsB/icon.png",
       "date_created": "2022-05-25T10:09:09.784330Z",
       "date_modified": "2023-02-21T18:13:11.061673Z",
@@ -775,8 +776,8 @@
         "23w06a",
         "23w07a"
       ],
-      "downloads": 1217717,
-      "follows": 2311,
+      "downloads": 1219804,
+      "follows": 2312,
       "icon_url": "https://cdn.modrinth.com/data/P7dR8mSH/icon.png",
       "date_created": "2021-01-22T11:04:41.419169Z",
       "date_modified": "2023-03-01T13:40:51.966878Z",
@@ -792,7 +793,7 @@
   ],
   "offset": 0,
   "limit": 1,
-  "total_hits": 241
+  "total_hits": 242
 } {
   "hits": [
   ],
@@ -834,8 +835,8 @@
         "1.19.2",
         "1.19.3"
       ],
-      "downloads": 426771,
-      "follows": 1543,
+      "downloads": 427951,
+      "follows": 1545,
       "icon_url": "https://cdn.modrinth.com/data/uXXizFIs/icon.jpg",
       "date_created": "2021-04-03T07:04:43.971189Z",
       "date_modified": "2022-12-08T17:53:41.221078Z",
@@ -882,7 +883,7 @@
         "1.19.2",
         "1.19.3"
       ],
-      "downloads": 303813,
+      "downloads": 304541,
       "follows": 1647,
       "icon_url": "https://cdn.modrinth.com/data/Orvt0mRa/icon.png",
       "date_created": "2021-07-19T17:56:39.449041Z",
@@ -939,8 +940,8 @@
         "1.19.2",
         "1.19.3"
       ],
-      "downloads": 613231,
-      "follows": 2392,
+      "downloads": 614310,
+      "follows": 2393,
       "icon_url": "https://cdn.modrinth.com/data/YL57xq9U/dc558eece920db435f9823ce86de0c4cde89800b.png",
       "date_created": "2021-05-27T05:11:15.690120Z",
       "date_modified": "2023-02-07T02:47:24.651146Z",
@@ -992,7 +993,7 @@
         "1.19.2",
         "1.19.3"
       ],
-      "downloads": 239342,
+      "downloads": 240064,
       "follows": 1162,
       "icon_url": "https://cdn.modrinth.com/data/fQEb0iXm/icon.png",
       "date_created": "2020-12-21T17:48:09.050177Z",
@@ -1055,8 +1056,8 @@
         "21w14a",
         "21w20a"
       ],
-      "downloads": 108704,
-      "follows": 694,
+      "downloads": 108910,
+      "follows": 696,
       "icon_url": "https://cdn.modrinth.com/data/2Uev7LdA/icon.png",
       "date_created": "2020-12-01T07:32:22.480321Z",
       "date_modified": "2023-02-11T22:10:07.816760Z",
@@ -1127,8 +1128,8 @@
         "22w06a",
         "22w07a"
       ],
-      "downloads": 219345,
-      "follows": 1468,
+      "downloads": 219950,
+      "follows": 1470,
       "icon_url": "https://cdn.modrinth.com/data/yBW8D80W/icon.png",
       "date_created": "2020-12-21T15:59:13.578447Z",
       "date_modified": "2022-12-23T22:03:23.095691Z",
@@ -1187,8 +1188,8 @@
         "1.19.2",
         "1.19.3"
       ],
-      "downloads": 590776,
-      "follows": 1724,
+      "downloads": 592167,
+      "follows": 1726,
       "icon_url": "https://cdn.modrinth.com/data/hvFnDODi/icon.png",
       "date_created": "2021-01-04T05:14:07.259717Z",
       "date_modified": "2022-06-08T01:13:18.555078Z",
@@ -1237,8 +1238,8 @@
         "1.19.2",
         "1.19.3"
       ],
-      "downloads": 763282,
-      "follows": 2866,
+      "downloads": 764775,
+      "follows": 2867,
       "icon_url": "https://cdn.modrinth.com/data/gvQqBUqZ/icon.png",
       "date_created": "2021-01-03T00:56:52.292581Z",
       "date_modified": "2022-12-08T21:50:52.237652Z",
@@ -1334,8 +1335,8 @@
         "23w05a",
         "23w07a"
       ],
-      "downloads": 453065,
-      "follows": 2425,
+      "downloads": 454109,
+      "follows": 2426,
       "icon_url": "https://cdn.modrinth.com/data/mOgUt4GM/icon.png",
       "date_created": "2020-11-06T05:11:04.725058Z",
       "date_modified": "2023-02-18T10:00:42.227611Z",
@@ -1428,7 +1429,7 @@
         "22w16a",
         "22w17a"
       ],
-      "downloads": 48191,
+      "downloads": 48302,
       "follows": 458,
       "icon_url": "https://cdn.modrinth.com/data/u5Ic2U1u/icon.png",
       "date_created": "2020-12-22T00:25:18.334979Z",
@@ -1484,8 +1485,8 @@
         "1.19.2",
         "1.19.3"
       ],
-      "downloads": 1071925,
-      "follows": 3621,
+      "downloads": 1074376,
+      "follows": 3622,
       "icon_url": "https://cdn.modrinth.com/data/AANobbMI/icon.png",
       "date_created": "2021-01-03T00:53:34.185936Z",
       "date_modified": "2023-02-05T19:39:55.551839Z",
@@ -1534,8 +1535,8 @@
         "1.19.2",
         "1.19.3"
       ],
-      "downloads": 1071925,
-      "follows": 3621,
+      "downloads": 1074376,
+      "follows": 3622,
       "icon_url": "https://cdn.modrinth.com/data/AANobbMI/icon.png",
       "date_created": "2021-01-03T00:53:34.185936Z",
       "date_modified": "2023-02-05T19:39:55.551839Z",
@@ -1579,7 +1580,7 @@
         "1.19.2",
         "1.19.3"
       ],
-      "downloads": 35153,
+      "downloads": 35290,
       "follows": 333,
       "icon_url": "https://cdn.modrinth.com/data/qyVF9oeo/798fbfae58ec95ad51f3e1d522b43227306c326c.png",
       "date_created": "2022-06-23T14:36:52.813391Z",
@@ -1625,8 +1626,8 @@
         "1.19.2",
         "1.19.3"
       ],
-      "downloads": 301829,
-      "follows": 1591,
+      "downloads": 302898,
+      "follows": 1593,
       "icon_url": "https://cdn.modrinth.com/data/H8CaAYZC/icon.png",
       "date_created": "2021-08-29T14:08:31.790201Z",
       "date_modified": "2022-06-17T13:02:19.651107Z",
@@ -1676,8 +1677,8 @@
         "1.19.2",
         "1.19.3"
       ],
-      "downloads": 613231,
-      "follows": 2392,
+      "downloads": 614310,
+      "follows": 2393,
       "icon_url": "https://cdn.modrinth.com/data/YL57xq9U/dc558eece920db435f9823ce86de0c4cde89800b.png",
       "date_created": "2021-05-27T05:11:15.690120Z",
       "date_modified": "2023-02-07T02:47:24.651146Z",
@@ -1695,5 +1696,5 @@
   ],
   "offset": 0,
   "limit": 1,
-  "total_hits": 383
+  "total_hits": 385
 }
