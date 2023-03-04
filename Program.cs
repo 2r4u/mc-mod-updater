@@ -14,20 +14,21 @@ client.DefaultRequestHeaders.Add("User-Agent", ".NET Foundation Repository Repor
 
 
 await eraseJson(@"..\\..\\..\\data.json");
-
-Console.WriteLine("What version of Minecraft are you updating to?");
+Console.WriteLine(">Welcome to Anthony's Minecraft Mod Updater!");
+Thread.Sleep(500);
+Console.WriteLine(">What version of Minecraft are you updating to?");
 String version = Console.ReadLine();
 String mcPath = "..\\..\\..\\..\\..\\..\\AppData\\Roaming\\.minecraft\\mods";
-    
+bool loop = true;
 string[] files = Directory.GetFiles(@mcPath);
 List<Mod> mods = new List<Mod>();
 ArrayList fnames = new ArrayList();
-Console.WriteLine("These are the files in your mods folder:");
+Console.WriteLine(">These are the files in your mods folder:");
 foreach (string file in files) {
     Console.WriteLine(Path.GetFileName(file).Replace("\\", "").Replace("..", ""));
     fnames.Add(Path.GetFileName(file));
 }
-Console.WriteLine("Are you sure you want to replace them with their updated versions?");
+Console.WriteLine(">Are you sure you want to replace them with their updated versions?");
 if (yn(Console.ReadLine()))
 {
     foreach (String file in fnames)
@@ -36,21 +37,45 @@ if (yn(Console.ReadLine()))
     }
     clean(mods);
     Console.WriteLine("==================================================");
-    Console.WriteLine("These are the mods that will be downloaded:");
-    Thread.Sleep(3000);
+    Console.WriteLine(">These are the mods that will be downloaded:");
     for (int i=0;i<mods.Count; i++)
     {
+        Thread.Sleep(500);
         Mod m = mods[i];
         Console.WriteLine(m.Name+": "+m.Description);
+        
     }
-    Thread.Sleep(3000);
-    Console.WriteLine("Some of these mods may not be correct. Please enter the number of the one you wish to remove.");
-    while (true)
-        //get user to narrow down mods until all are correct
+    Console.WriteLine(">Some of these mods may not be correct. Please enter the number of the one you wish to remove.");
+    Thread.Sleep(500);
+    while (loop)
     {
-        Console.WriteLine((i + 1) + ". " +);
-        int mn = Int32.Parse(Console.ReadLine());
+        for (int i = 0; i < mods.Count; i++)
+        {
+            Mod m = mods[i];
+            Console.WriteLine(i+1+". "+m.Name + ": " + m.Description);
+        }
+        Console.WriteLine(">Please enter the number of any mod you don't want to download. If there are none, press Enter.");
+        Thread.Sleep(500);
+        try
+        {
+            int mn = Int32.Parse(Console.ReadLine())-1;
+            Console.WriteLine(">Removed " + mods[mn].Name);
+            mods.Remove(mods[mn]);
+        }
+        catch 
+        {
+            Console.WriteLine(">Are you done?");
+            if (yn(Console.ReadLine()))
+            {
+                loop = false;
+            }
+            else
+            {
+                continue;
+            }
+        }
     }
+    Console.WriteLine("awesome!");
 }
 else
 {
