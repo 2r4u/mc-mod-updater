@@ -6,6 +6,7 @@
     <RootNamespace>mod_updater</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <ApplicationManifest></ApplicationManifest>
   </PropertyGroup>
 
   <ItemGroup>
