@@ -50,7 +50,19 @@ if (yn(Console.ReadLine()))
     Thread.Sleep(200);
     prune(mods);
     await dlprocessAsync(client,mods,version,mcPath);
-    
+    Console.WriteLine(">Do you want to remove the old files?");
+    if (yn(Console.ReadLine()))
+    {
+        foreach(string f in fnames)
+        {
+            await deleteFile(f);
+        }
+        Console.WriteLine("Have a great day!");
+    }
+    else
+    {
+        Console.WriteLine("Have a great day!");
+    }
 }
 else
 {
@@ -100,21 +112,29 @@ static async Task save(HttpClient client, Mod mod, String version,string path)
     var vjson = await client.GetStringAsync("https://api.modrinth.com/v2/project/" + mod.Id + "/version?loaders=[\"fabric\"]&game_versions=[\"" + version + "\"]");
     List<Base> b = JsonSerializer.Deserialize<List<Base>>(vjson);
     string furl = b[0].files[0].url;
-    await DownloadFileAsync(client, furl, mod.Name,path);
+    string name = b[0].files[0].filename;
+    await DownloadFileAsync(client, furl, path,name);
+    
 }
- static async Task DownloadFileAsync(HttpClient client,string uri, string name,string outputPath)
+ static async Task DownloadFileAsync(HttpClient client,string uri,string outputPath,string name)
 {
     Uri uriResult;
-    string path = outputPath + "\\" + name + ".jar";
+    string path = outputPath + "\\" + name+ ".jar";
     if (!Uri.TryCreate(uri, UriKind.Absolute, out uriResult))
         throw new InvalidOperationException("URI is invalid.");
 
     if (!File.Exists(path))
-        File.Create(path);
-        File.SetAttributes(path,(new FileInfo(path)).Attributes | FileAttributes.Normal);
+        using (File.Create(path))
+        {
+            File.SetAttributes(path, (new FileInfo(path)).Attributes | FileAttributes.Normal);
+        }
 
     byte[] fileBytes = await client.GetByteArrayAsync(uri);
     File.WriteAllBytes(path, fileBytes);
+}
+static async Task deleteFile(string path)
+{
+    File.Delete("..\\..\\..\\..\\..\\..\\AppData\\Roaming\\.minecraft\\mods\\"+path);
 }
 static async Task eraseJson(string path)
 {
