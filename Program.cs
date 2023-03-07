@@ -8,25 +8,28 @@ using System;
 using System.Net;
 using System.Xml.Linq;
 using System.Net.Http;
+using System.Runtime.Serialization;
 
 HttpClient client = new HttpClient();
 client.DefaultRequestHeaders.Accept.Clear();
 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
 client.DefaultRequestHeaders.Add("User-Agent", ".NET Foundation Repository Reporter");
-await eraseJson(@"..\\..\\..\\data.json");
+
+
 
 Console.WriteLine(">Welcome to Anthony's Minecraft Mod Updater!");
 Thread.Sleep(500);
+Console.WriteLine(">Please enter the path oy your Mods folder.\n (can be found in address bar in file explorer)");
+string mcPath= Console.ReadLine();
 Console.WriteLine(">What version of Minecraft are you updating to?");
 String version = Console.ReadLine();
-String mcPath = "..\\..\\..\\..\\..\\..\\AppData\\Roaming\\.minecraft\\mods";
 
 string[] files = Directory.GetFiles(@mcPath);
 List<Mod> mods = new List<Mod>();
-ArrayList fnames = new ArrayList();
+List<string> fnames = new List<string>();
 Console.WriteLine(">These are the files in your mods folder:");
 foreach (string file in files) {
-    Console.WriteLine(Path.GetFileName(file).Replace("\\", "").Replace("..", ""));
+    Console.WriteLine(Path.GetFileName(file));
     fnames.Add(Path.GetFileName(file));
 }
 Console.WriteLine(">Are you sure you want to replace them with their updated versions?");
@@ -49,13 +52,13 @@ if (yn(Console.ReadLine()))
     Console.WriteLine(">Some of these mods may not be correct.");
     Thread.Sleep(200);
     prune(mods);
-    await dlprocessAsync(client,mods,version,mcPath);
+    await dlprocessAsync(client,mods,version,mcPath,files,fnames);
     Console.WriteLine(">Do you want to remove the old files?");
     if (yn(Console.ReadLine()))
     {
         foreach(string f in fnames)
         {
-            await deleteFile(f);
+            await deleteFile(mcPath+"\\"+f);
         }
         Console.WriteLine("Have a great day!");
     }
@@ -68,7 +71,7 @@ else
 {
     Console.WriteLine(">That's too bad. Run this app again when you want to.");
 }
-static async Task dlprocessAsync(HttpClient c,List<Mod> mods, String v,string p)
+static async Task dlprocessAsync(HttpClient c,List<Mod> mods, String v,string p, string[] files, List<string> fnames)
 {
     Console.WriteLine(">Here is your upated list of mods:");
     for (int i = 0; i < mods.Count; i++)
@@ -83,7 +86,7 @@ static async Task dlprocessAsync(HttpClient c,List<Mod> mods, String v,string p)
         foreach (Mod m in mods)
         {
             Console.WriteLine("Downloading " + m.Name);
-            await save(c,m,v,p);
+            await save(c,m,v,p,files,fnames);
         }
     }
     else
@@ -102,44 +105,63 @@ static async Task dlprocessAsync(HttpClient c,List<Mod> mods, String v,string p)
             }
             else
             {
-                await dlprocessAsync(c,mods, v,p);
+                await dlprocessAsync(c, mods, v, p, files, fnames);
             }
         }
     }
 }
-static async Task save(HttpClient client, Mod mod, String version,string path)
+static async Task  IgnoreFile(file f, string[] files, List<string> fnames)
+{
+    foreach (string fname in fnames)
+    {
+        if(fname.Equals(f.filename))
+        {
+            fnames.Remove(fname);
+            break;
+        }
+    }
+}
+static async Task save(HttpClient client, Mod mod, String version,string path, string[] files, List<string> fnames)
 {
     var vjson = await client.GetStringAsync("https://api.modrinth.com/v2/project/" + mod.Id + "/version?loaders=[\"fabric\"]&game_versions=[\"" + version + "\"]");
     List<Base> b = JsonSerializer.Deserialize<List<Base>>(vjson);
-    string furl = b[0].files[0].url;
-    string name = b[0].files[0].filename;
-    await DownloadFileAsync(client, furl, path,name);
+    file f = b[0].files[0];
+    
+    await DownloadFileAsync(client, path,f,files,fnames);
     
 }
- static async Task DownloadFileAsync(HttpClient client,string uri,string outputPath,string name)
+ static async Task DownloadFileAsync(HttpClient client,string outputPath,file f, string[] files, List<string> fnames)
 {
     Uri uriResult;
-    string path = outputPath + "\\" + name+ ".jar";
-    if (!Uri.TryCreate(uri, UriKind.Absolute, out uriResult))
+    string path = outputPath + "\\" + f.filename;
+    if (!Uri.TryCreate(f.url, UriKind.Absolute, out uriResult))
+    {
         throw new InvalidOperationException("URI is invalid.");
+    }
+
 
     if (!File.Exists(path))
+    {
         using (File.Create(path))
         {
             File.SetAttributes(path, (new FileInfo(path)).Attributes | FileAttributes.Normal);
         }
+        byte[] fileBytes = await client.GetByteArrayAsync(f.url);
+        File.WriteAllBytes(path, fileBytes);
+    }
+    else
+    {
+        Console.WriteLine(">This mod's compatible file is already downloaded.");
+        await IgnoreFile(f,files,fnames);
+    }
 
-    byte[] fileBytes = await client.GetByteArrayAsync(uri);
-    File.WriteAllBytes(path, fileBytes);
+
 }
 static async Task deleteFile(string path)
 {
-    File.Delete("..\\..\\..\\..\\..\\..\\AppData\\Roaming\\.minecraft\\mods\\"+path);
+    File.Delete(path);
 }
-static async Task eraseJson(string path)
-{
-    File.WriteAllText(@path, String.Empty);
-}
+
 
 static async Task updateMods(HttpClient client, String file, String version, List<Mod> list)
 {
