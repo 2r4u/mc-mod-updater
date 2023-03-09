@@ -37,7 +37,7 @@ if (yn(Console.ReadLine()))
 {
     foreach (String file in fnames)
     {
-        await updateMods(client, file, version,mods);
+        await updateMods(client, file, version,mods,fnames);
     }
     clean(mods);
     Console.WriteLine("==================================================");
@@ -51,9 +51,9 @@ if (yn(Console.ReadLine()))
     }
     Console.WriteLine(">Some of these mods may not be correct.");
     Thread.Sleep(200);
-    prune(mods);
+    prune(mods,fnames);
     await dlprocessAsync(client,mods,version,mcPath,files,fnames);
-    Console.WriteLine(">Do you want to remove the old files?");
+    Console.WriteLine(">Do you want to remove the old files? \n (will not delete files of mods not updated)");
     if (yn(Console.ReadLine()))
     {
         foreach(string f in fnames)
@@ -94,7 +94,7 @@ static async Task dlprocessAsync(HttpClient c,List<Mod> mods, String v,string p,
         Console.WriteLine(">Do you want to remove more mods?");
         if (yn(Console.ReadLine()))
         {
-            prune(mods);
+            prune(mods, fnames);
         }
         else
         {
@@ -121,6 +121,7 @@ static async Task  IgnoreFile(file f, string[] files, List<string> fnames)
         }
     }
 }
+
 static async Task save(HttpClient client, Mod mod, String version,string path, string[] files, List<string> fnames)
 {
     var vjson = await client.GetStringAsync("https://api.modrinth.com/v2/project/" + mod.Id + "/version?loaders=[\"fabric\"]&game_versions=[\"" + version + "\"]");
@@ -163,7 +164,7 @@ static async Task deleteFile(string path)
 }
 
 
-static async Task updateMods(HttpClient client, String file, String version, List<Mod> list)
+static async Task updateMods(HttpClient client, String file, String version, List<Mod> list,List<string> fnames)
 {
     
     /*File.AppendAllText(@"..\\..\\..\\data.json", json);*/
@@ -179,10 +180,12 @@ static async Task updateMods(HttpClient client, String file, String version, Lis
     {
         Console.WriteLine(e.Message);
         Console.WriteLine("This mod might not be on Modrinth or updated to this version.");
+        fnames.Remove(file);
+        
     }
     
 }
-static void prune(List<Mod> mods)
+static void prune(List<Mod> mods,List<string> fnames)
 {
     bool loop = true;
     while (loop)
@@ -199,6 +202,7 @@ static void prune(List<Mod> mods)
             int mn = Int32.Parse(Console.ReadLine()) - 1;
             Console.WriteLine(">Removed " + mods[mn].Name);
             mods.Remove(mods[mn]);
+            fnames.RemoveAt(mn);
         }
         catch
         {
